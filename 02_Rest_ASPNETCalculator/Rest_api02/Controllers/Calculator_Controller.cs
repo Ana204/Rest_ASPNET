@@ -20,7 +20,7 @@ namespace Rest_api01.Controllers
         }
 
         //endPoint via http 
-        [HttpGet ("sum/{firstNumber}/{secondNUmber}")]
+        [HttpGet ("sum/{firstNumber}/{secondNumber}")]
         public IActionResult Get(string firstNumber, string secondNumber)
         {
             //verificando se os numeros passados no endPoint é numerico
