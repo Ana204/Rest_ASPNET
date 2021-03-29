@@ -32,16 +32,29 @@ namespace Rest_api01.Controllers
           return BadRequest("Invalid Input");
         }
 
-        //Método chamado no if para converter string para Decimal
-        private int ConvertToDecimal(string firstNumber)
-        {
-            throw new NotImplementedException();
-        }
 
         //Método Chamado no if para a verificação 
-        private bool IsNumeric(string firstNumber)
+        private bool IsNumeric(string strNumber)
         {
-            throw new NotImplementedException();
+            double number;
+
+            bool isNumber = double.TryParse(strNumber, System.Globalization.NumberStyles.Any, System.Globalization.NumberFormatInfo.InvariantInfo, out number);
+            return isNumber;
+            
         }
+
+        //Método chamado no if para converter string para Decimal
+        private decimal ConvertToDecimal(string strNumber)
+        {
+            decimal decimalValue;
+
+            if(decimal.TryParse(strNumber, out decimalValue))
+            {
+                return decimalValue;
+            }
+
+            return 0;
+        }
+
     }
 }
