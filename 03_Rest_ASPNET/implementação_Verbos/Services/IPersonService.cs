@@ -9,7 +9,7 @@ namespace IMPLEMENTAÇÃO_VERBOS.Services
 
         Person FindByID(long id);
 
-        List<Person> FindALL();
+        List<Person> FindAll();
 
         Person Update(Person person);
         
