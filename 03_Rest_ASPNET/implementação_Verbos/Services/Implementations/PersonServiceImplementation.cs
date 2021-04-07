@@ -17,7 +17,7 @@ namespace IMPLEMENTAÇÃO_VERBOS.Services.Implementations
 
         public void Delete(long id)
         {
-            throw new NotImplementedException();
+            
         }
 
         public List<Person> FindAll()
