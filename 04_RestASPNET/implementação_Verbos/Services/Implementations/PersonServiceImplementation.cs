@@ -2,46 +2,51 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
-using System.Threading.Tasks;
+using implementação_Verbos.model.Context;
 using IMPLEMENTAÇÃO_VERBOS.Model;
+using IMPLEMENTAÇÃO_VERBOS.Services;
 
-namespace IMPLEMENTAÇÃO_VERBOS.Services.Implementations
+namespace implementação_Verbos.Services.Implementations
 {
     public class PersonServiceImplementation : IPersonService
     {
-        private volatile int count;
+        private MySQLContext _context;
+
+        public PersonServiceImplementation(MySQLContext context)
+        {
+            _context = context;
+        }
         public Person Create(Person person)
         {
-            return person;
+            try
+            {
+                _context.Add(person);
+                _context.SaveChanges();
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
+           return person;
         }
 
-        public void Delete(long id)
-        {
-            
-        }
+        public void Delete(long id){}
 
         public List<Person> FindAll()
         {
-           List<Person> persons = new List<Person>();
-           
-           for(int i = 0; i < 8; i++)
-           {
-               Person person = MockPerson(i);
-               persons.Add(person);
-           }
-           return persons;
+            return _context.Persons.ToList();
         }
-
 
         public Person FindByID(long id)
         {
            return new Person
            {
-               Id = IncrementAndGet(), 
-               FirstName = "Leandro",
-               LastName = "Costa",
-               Address = "Uberlandia - Minas Gerais - Brasil",
-               Gender = "Male"
+               Id = 1,
+               FirstName = "Ana",
+               LastName = "Gomes",
+               Address = "São Paulo - SP - Brasil",
+               Gender = "Male",
            };
         }
 
@@ -50,21 +55,5 @@ namespace IMPLEMENTAÇÃO_VERBOS.Services.Implementations
             return person;
         }
 
-        private Person MockPerson(int i )
-        {
-            return new Person
-           {
-               Id = IncrementAndGet(), 
-               FirstName = "Person Name" + i,
-               LastName = "Person LastName" + i,
-               Address = "Some Address" + i,
-               Gender = "Male"
-           };
-        }
-       
-        private long IncrementAndGet()
-        {
-            return Interlocked.Increment(ref count);
-        }
     }
 }
