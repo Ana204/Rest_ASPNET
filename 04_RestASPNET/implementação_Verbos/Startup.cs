@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using implementação_Verbos.model.Context;
+using implementação_Verbos.Services.Implementations;
 using IMPLEMENTAÇÃO_VERBOS.Services;
-using IMPLEMENTAÇÃO_VERBOS.Services.Implementations;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -33,8 +33,8 @@ namespace Rest_api01
 
             services.AddControllers();
 
-            var connection = Configuration["MySQLConnection : MySQLConnectionString"];
-            services.AddDbContext<MysqlContext>(options => options.UseMySql(connection));
+            var connection = Configuration["MySQLConnection:MySQLConnectionString"];
+            services.AddDbContext<MySQLContext>(options => options.UseMySql(connection));
 
             //Dependency injection
             services.AddScoped<IPersonService, PersonServiceImplementation>();
